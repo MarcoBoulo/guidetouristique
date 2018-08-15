@@ -22,7 +22,7 @@ var userSchema = mongoose.Schema({
 
   last_name:String,
   first_name:String,
-  mail:String,
+  email:String,
   password:String,
 
   // first_name: String,
@@ -47,7 +47,7 @@ var HistoryModel = mongoose.model('histories', historySchema);
 
 /********************** GET home page. **********************/
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Guide Touristique3' });
+  res.render('index', { title: 'Guide Touristique4' });
 });
 
 
