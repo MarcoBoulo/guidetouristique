@@ -3,8 +3,14 @@ var router = express.Router();
 var mongoose= require('mongoose');
 
 // connexion vers BDD mongoose (mlab)
-var options = { server: { socketOptions: {connectTimeoutMS: 5000 } }};
-mongoose.connect('mongodb://Jenn:mlab123@ds161751.mlab.com:61751/uniqueguide',
+var dbUser = 'bdduser';
+var dbPassword = 'endives2018';
+var server_uri = 'ds163730.mlab.com:63730';
+var dbName = 'bddmarcoboulo';
+
+var options = { server: { socketOptions: {connectTimeoutMS: 3000 } }};
+// mongoose.connect('mongodb://Jenn:mlab123@ds161751.mlab.com:61751/uniqueguide',
+mongoose.connect('mongodb://' + dbUser + ':' + dbPassword + '@' + server_uri + '/' + dbName,
     options,
     function(err) {
      console.log(err);
@@ -13,14 +19,21 @@ mongoose.connect('mongodb://Jenn:mlab123@ds161751.mlab.com:61751/uniqueguide',
 
 // schema user
 var userSchema = mongoose.Schema({
-  first_name: String,
-  last_name: String,
-  email: String,
-  password: String,
-})
 
+  last_name:String,
+  first_name:String,
+  mail:String,
+  password:String,
+
+  // first_name: String,
+  // last_name: String,
+  // email: String,
+  // password: String,
+})
 // modèle user (collection users + lien vers le schema user)
-var UserModel = mongoose.model('users', userSchema);
+// var UserModel = mongoose.model('users', userSchema);
+// "visiteurs" est le nom de la collection dans la Bdd
+var UserModel = mongoose.model("visiteurs", userSchema);
 
 // schema history
 var historySchema = mongoose.Schema({
@@ -34,12 +47,14 @@ var HistoryModel = mongoose.model('histories', historySchema);
 
 /********************** GET home page. **********************/
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Guide Touristique' });
+  res.render('index', { title: 'Guide Touristique2' });
 });
 
 
 /********************** POST SIGN UP = créé un user dans le BDD **********************/
 router.post('/signup', function(req, res, next) {
+
+  console.log('route signup');
 
   // créé un nouvel user
   var newUser = new UserModel ({
