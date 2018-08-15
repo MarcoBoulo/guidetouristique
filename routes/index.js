@@ -34,7 +34,7 @@ var HistoryModel = mongoose.model('histories', historySchema);
 
 /********************** GET home page. **********************/
 router.get('/', function(req, res, next) {
-  res.render('index', { title: 'Unique Guide' });
+  res.render('index', { title: 'Guide Touristique' });
 });
 
 
